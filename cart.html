@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giỏ hàng | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    h1 { font-size: 28px; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
+    th, td { border: 1px solid #ccc; padding: 12px; text-align: center; }
+    th { background: #111; color: #fff; }
+    input[type="number"] { width: 60px; padding: 6px; }
+    .total { font-size: 20px; font-weight: bold; text-align: right; margin-top: 20px; }
+    button { padding: 10px 20px; background: #111; color: #fff; border: none; cursor: pointer; border-radius: 4px; }
+    button:hover { background: #333; }
+    .empty { text-align: center; font-size: 18px; margin-top: 40px; }
+    .checkout-btn { margin-top: 20px; text-align: right; }
+  </style>
+</head>
+<body>
+  <h1>Giỏ hàng của bạn</h1>
+  <div id="cart-container"></div>
+
+  <script>
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cart-container");
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="empty">Giỏ hàng đang trống.</p>`;
+        return;
+      }
+
+      let total = 0;
+      let html = `<table><tr><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th><th></th></tr>`;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        html += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.price.toLocaleString()}₫</td>
+            <td>
+              <input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)">
+            </td>
+            <td>${itemTotal.toLocaleString()}₫</td>
+            <td><button onclick="removeItem(${index})">Xóa</button></td>
+          </tr>
+        `;
+      });
+      html += `</table><div class="total">Tổng cộng: ${total.toLocaleString()}₫</div>`;
+      html += `<div class="checkout-btn"><button onclick="checkout()">Tiến hành thanh toán</button></div>`;
+      container.innerHTML = html;
+    }
+
+    function updateQuantity(index, value) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart[index].quantity = parseInt(value);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function checkout() {
+      window.location.href = "checkout.html";
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

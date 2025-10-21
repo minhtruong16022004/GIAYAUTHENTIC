@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thống kê & Báo cáo | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    h1 { margin-bottom: 20px; }
+    .report { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .report p { margin: 10px 0; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Thống kê & Báo cáo</h1>
+  <div class="report" id="reportBox"></div>
+
+  <script>
+    const orders = JSON.parse(localStorage.getItem("user_orders")) || [];
+    const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+    const totalOrders = orders.length;
+    const avgOrder = totalOrders ? Math.round(totalRevenue / totalOrders) : 0;
+
+    document.getElementById("reportBox").innerHTML = `
+      <p><strong>Tổng đơn hàng:</strong> ${totalOrders}</p>
+      <p><strong>Tổng doanh thu:</strong> ${totalRevenue.toLocaleString()}₫</p>
+      <p><strong>Giá trị đơn trung bình:</strong> ${avgOrder.toLocaleString()}₫</p>
+    `;
+  </script>
+</body>
+</html>

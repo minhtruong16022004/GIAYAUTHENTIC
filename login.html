@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng nhập | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #f9f9f9; padding: 40px; color: #111; }
+    .login-box { max-width: 400px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    h1 { text-align: center; margin-bottom: 20px; }
+    label { display: block; margin-top: 15px; font-weight: 500; }
+    input, select { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 12px; margin-top: 20px; background: #111; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Đăng nhập</h1>
+    <label>Email</label>
+    <input type="email" id="email" required />
+
+    <label>Mật khẩu</label>
+    <input type="password" id="password" required />
+
+    <label>Vai trò</label>
+    <select id="role">
+      <option value="user">Khách hàng</option>
+      <option value="admin">Quản trị viên</option>
+    </select>
+
+    <button onclick="login()">Đăng nhập</button>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+
+      if (!email || !password) {
+        alert("Vui lòng nhập đầy đủ thông tin.");
+        return;
+      }
+
+      // Lưu thông tin người dùng
+      const profile = {
+        fullname: email.split("@")[0],
+        email,
+        role
+      };
+      localStorage.setItem("user_profile", JSON.stringify(profile));
+      localStorage.setItem("user_password", password);
+
+      // Chuyển hướng theo vai trò
+      if (role === "admin") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+  </script>
+</body>
+</html>

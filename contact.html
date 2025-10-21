@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Liên hệ | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; margin: 0; background: #f9f9f9; color: #111; }
+    header { background: #fff; border-bottom: 1px solid #ccc; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 24px; font-weight: bold; }
+    nav a { margin-left: 20px; text-decoration: none; color: #111; font-weight: 500; }
+    .container { padding: 40px; max-width: 800px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    h2 { font-size: 28px; margin-bottom: 20px; }
+    label { display: block; margin-top: 15px; font-weight: 500; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 12px 24px; background: #111; color: #fff; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; }
+    button:hover { background: #333; }
+    .info { margin-top: 40px; font-size: 16px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AUTHENTIC</h1>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Liên hệ với chúng tôi</h2>
+    <form onsubmit="submitContact(event)">
+      <label>Họ và tên</label>
+      <input type="text" id="name" required />
+      <label>Email</label>
+      <input type="email" id="email" required />
+      <label>Nội dung liên hệ</label>
+      <textarea id="message" rows="5" required></textarea>
+      <button type="submit">Gửi liên hệ</button>
+    </form>
+
+    <div class="info">
+      <p><strong>Địa chỉ:</strong> 44/1A đường 22 khu phố 1, Thủ Đức , TP. Hồ Chí Minh</p>
+      <p><strong>Email:</strong> Nhatminh@authentic.vn</p>
+      <p><strong>Hotline:</strong> 0385913044</p>
+      <p>Chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.</p>
+    </div>
+  </div>
+
+  <script>
+    function submitContact(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("Vui lòng điền đầy đủ thông tin.");
+        return;
+      }
+
+      alert("Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.");
+      document.querySelector("form").reset();
+    }
+  </script>
+</body>
+</html>

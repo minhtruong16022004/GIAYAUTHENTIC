@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đơn hàng của tôi | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    h1 { margin-bottom: 20px; }
+    .order { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .order h3 { margin-bottom: 10px; }
+    .order p { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>Đơn hàng của tôi</h1>
+  <div id="orderList"></div>
+
+  <script>
+    // Thêm đơn hàng mẫu nếu chưa có
+    if (!localStorage.getItem("user_orders")) {
+      const sampleOrders = [
+        {
+          name: "Minh Nguyễn",
+          address: "123 Lê Văn Việt, TP Thủ Đức",
+          phone: "0909123456",
+          total: 1250000
+        },
+        {
+          name: "Lan Trần",
+          address: "45 Nguyễn Thị Minh Khai, Quận 1",
+          phone: "0938123456",
+          total: 890000
+        },
+        {
+          name: "Tuấn Phạm",
+          address: "78 Trường Chinh, Tân Bình",
+          phone: "0987654321",
+          total: 1575000
+        }
+      ];
+      localStorage.setItem("user_orders", JSON.stringify(sampleOrders));
+    }
+
+    const orders = JSON.parse(localStorage.getItem("user_orders")) || [];
+    const container = document.getElementById("orderList");
+
+    if (orders.length === 0) {
+      container.innerHTML = "<p>Chưa có đơn hàng nào.</p>";
+    } else {
+      orders.forEach((order, i) => {
+        const div = document.createElement("div");
+        div.className = "order";
+        div.innerHTML = `
+          <h3>Đơn hàng #${i + 1}</h3>
+          <p><strong>Khách:</strong> ${order.name}</p>
+          <p><strong>Địa chỉ:</strong> ${order.address}</p>
+          <p><strong>SĐT:</strong> ${order.phone}</p>
+          <p><strong>Tổng tiền:</strong> ${order.total.toLocaleString()}₫</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

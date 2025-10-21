@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tìm kiếm sản phẩm | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    input { width: 100%; max-width: 400px; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; }
+    .product { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .product img { width: 100%; max-width: 300px; }
+    .product h4 { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>Tìm kiếm sản phẩm</h1>
+  <input type="text" id="searchInput" placeholder="Nhập tên sản phẩm..." />
+  <div id="results"></div>
+
+  <script>
+    const products = JSON.parse(localStorage.getItem("admin_products")) || [];
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("results");
+
+    input.addEventListener("input", () => {
+      const keyword = input.value.toLowerCase().trim();
+      results.innerHTML = "";
+      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+      filtered.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <a href="product-details.html?id=${p.id}">
+            <img src="${p.img}" alt="${p.name}" />
+            <h4>${p.name}</h4>
+          </a>
+          <p>${p.price.toLocaleString()}₫</p>
+        `;
+        results.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

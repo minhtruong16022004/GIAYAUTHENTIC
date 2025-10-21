@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giày AUTHENTIC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #111;
+    }
+    header {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .banner {
+      background: linear-gradient(to right, #f2f2f2, #e6e6e6);
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .banner h2 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #111;
+    }
+    .banner p {
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: #555;
+    }
+    .cta {
+      margin-top: 30px;
+    }
+    .cta a {
+      padding: 12px 24px;
+      border: 2px solid #111;
+      text-decoration: none;
+      color: #111;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .cta a:hover {
+      background: #111;
+      color: #fff;
+    }
+    section {
+      padding: 40px;
+    }
+    h3.section-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 2px solid #111;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .product {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      border-radius: 6px;
+    }
+    .product:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .product h4 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #111;
+    }
+    .product p {
+      font-size: 16px;
+      color: #333;
+    }
+    .product a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .sale-tag {
+      background-color: #e53935;
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 12px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      border-radius: 4px;
+    }
+    .footer {
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AUTHENTIC</h1>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <h2>AUTHENTIC STYLE</h2>
+    <p>Giày chất – Phong cách chất – Đậm cá tính</p>
+    <div class="cta">
+      <a href="shop.html">Xem tất cả sản phẩm</a>
+    </div>
+  </section>
+
+  <!-- Giày đang bán -->
+  <section>
+    <h3 class="section-title">👟 Giày đang bán</h3>
+    <div class="products">
+      <div class="product">
+        <a href="product-details.html?id=nike-af1">
+          <img src="https://via.placeholder.com/300x200?text=Nike+AF1" />
+          <h4>Nike Air Force 1</h4>
+        </a>
+        <p>2.500.000₫</p>
+      </div>
+      <div class="product">
+        <a href="product-details.html?id=adidas-superstar">
+          <img src="https://via.placeholder.com/300x200?text=Adidas+Superstar" />
+          <h4>Adidas Superstar</h4>
+        </a>
+        <p>2.200.000₫</p>
+      </div>
+      <div class="product">
+        <a href="product-details.html?id=converse-chuck70">
+          <img src="https://via.placeholder.com/300x200?text=Converse+Chuck+70" />
+          <h4>Converse Chuck 70</h4>
+        </a>
+        <p>1.800.000₫</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Giày bán chạy -->
+  <section>
+    <h3 class="section-title">🔥 Giày bán chạy</h3>
+    <div class="products">
+      <div class="product">
+        <a href="product-details.html?id=nike-dunklow">
+          <img src="https://via.placeholder.com/300x200?text=Nike+Dunk+Low" />
+          <h4>Nike Dunk Low</h4>
+        </a>
+        <p>3.000.000₫</p>
+      </div>
+      <div class="product">
+        <a href="product-details.html?id=adidas-nmdr1">
+          <img src="https://via.placeholder.com/300x200?text=Adidas+NMD+R1" />
+          <h4>Adidas NMD R1</h4>
+        </a>
+        <p>3.000.000₫</p>
+      </div>
+      <div class="product">
+        <a href="product-details.html?id=vans-oldskool">
+          <img src="https://via.placeholder.com/300x200?text=Vans+Old+Skool" />
+          <h4>Vans Old Skool</h4>
+        </a>
+        <p>1.600.000₫</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Giày giảm giá -->
+  <section>
+    <h3 class="section-title">💸 Giày giảm giá</h3>
+    <div class="products">
+      <div class="product">
+        <div class="sale-tag">-20%</div>
+        <a href="product-details.html?id=adidas-ultraboost">
+          <img src="https://via.placeholder.com/300x200?text=Adidas+Ultraboost" />
+          <h4>Adidas Ultraboost</h4>
+        </a>
+        <p><s>3.500.000₫</s> 2.800.000₫</p>
+      </div>
+      <div class="product">
+        <div class="sale-tag">-15%</div>
+        <a href="product-details.html?id=nike-zoomfly">
+          <img src="https://via.placeholder.com/300x200?text=Nike+Zoom+Fly" />
+          <h4>Nike Zoom Fly</h4>
+        </a>
+        <p><s>3.300.000₫</s> 2.805.000₫</p>
+      </div>
+      <div class="product">
+        <div class="sale-tag">-10%</div>
+        <a href="product-details.html?id=reebok-classic">
+          <img src="https://via.placeholder.com      <div class="product">
+        <div class="sale-tag">-10%</div>
+        <a href="product-details.html?id=reebok-classic">
+          <img src="https://via.placeholder.com/300x200?text=Reebok+Classic" />
+          <h4>Reebok Classic</h4>
+        </a>
+        <p><s>1.900.000₫</s> 1.710.000₫</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 Giày AUTHENTIC.
+    <a href="policy.html">Chính sách</a> |
+    <a href="contact.html">Liên hệ</a> |
+    <a href="about.html">Giới thiệu</a> |
+    <a href="faq.html">Q&A</a> | 
+  </footer>
+</body>
+</html>

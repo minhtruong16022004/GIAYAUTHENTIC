@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quản lý nhân viên | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    h1 { margin-bottom: 20px; }
+    .staff { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .staff p { margin: 4px 0; }
+    input { padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; background: #111; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <h1>Quản lý nhân viên</h1>
+
+  <div>
+    <input type="text" id="staffName" placeholder="Tên nhân viên" />
+    <input type="email" id="staffEmail" placeholder="Email" />
+    <button onclick="addStaff()">Thêm nhân viên</button>
+  </div>
+
+  <div id="staffList" style="margin-top: 30px;"></div>
+
+  <script>
+    let staff = JSON.parse(localStorage.getItem("admin_staff")) || [];
+
+    function renderStaff() {
+      const container = document.getElementById("staffList");
+      container.innerHTML = "";
+      if (staff.length === 0) {
+        container.innerHTML = "<p>Chưa có nhân viên nào.</p>";
+        return;
+      }
+      staff.forEach((s, i) => {
+        const div = document.createElement("div");
+        div.className = "staff";
+        div.innerHTML = `
+          <p><strong>Nhân viên #${i + 1}</strong></p>
+          <p>Tên: ${s.name}</p>
+          <p>Email: ${s.email}</p>
+          <button onclick="deleteStaff(${i})">Xóa</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function addStaff() {
+      const name = document.getElementById("staffName").value.trim();
+      const email = document.getElementById("staffEmail").value.trim();
+      if (!name || !email) return alert("Vui lòng nhập đầy đủ thông tin.");
+      staff.push({ name, email });
+      localStorage.setItem("admin_staff", JSON.stringify(staff));
+      renderStaff();
+      document.getElementById("staffName").value = "";
+      document.getElementById("staffEmail").value = "";
+    }
+
+    function deleteStaff(index) {
+      staff.splice(index, 1);
+      localStorage.setItem("admin_staff", JSON.stringify(staff));
+      renderStaff();
+    }
+
+    renderStaff();
+  </script>
+</body>
+</html>

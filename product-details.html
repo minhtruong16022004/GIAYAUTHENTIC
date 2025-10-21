@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chi tiết sản phẩm | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; margin: 0; background: #f9f9f9; color: #111; }
+    header { background: #fff; border-bottom: 1px solid #ccc; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 24px; font-weight: bold; }
+    nav a { margin-left: 20px; text-decoration: none; color: #111; font-weight: 500; }
+    .container { padding: 40px; }
+    .product-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 800px; margin: auto; }
+    .product-box img { width: 100%; max-width: 400px; display: block; margin-bottom: 20px; }
+    .price { font-weight: bold; font-size: 20px; margin: 10px 0; }
+    select, textarea, input { padding: 8px; margin: 6px 0; width: 100%; max-width: 400px; }
+    button { background: #111; color: #fff; padding: 10px 20px; border: none; cursor: pointer; margin-right: 10px; border-radius: 4px; }
+    button:hover { background: #333; }
+    .review-box { margin-top: 30px; }
+    .review-item { border-top: 1px solid #eee; padding: 10px 0; }
+    .review-item strong { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AUTHENTIC</h1>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div id="product-container"></div>
+  </div>
+
+  <script>
+    const products = [
+      { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, img: "your-nike-af1.jpg", desc: "Giày cổ điển, dễ phối đồ.", size: [39, 40, 41, 42] },
+      { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, img: "your-adidas-superstar.jpg", desc: "Thiết kế sọc đặc trưng, phong cách retro.", size: [39, 40, 41] },
+      { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, img: "your-converse-chuck70.jpg", desc: "Canvas cao cấp, đế cao su dày.", size: [38, 39, 40] },
+      { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, img: "your-nike-dunklow.jpg", desc: "Phối màu đa dạng, chất liệu da.", size: [40, 41] },
+      { id: "adidas-ultraboost", name: "Adidas Ultraboost", price: 3500000, img: "your-adidas-ultraboost.jpg", desc: "Đế Boost siêu êm, chạy bộ cực ngon.", size: [41, 42] },
+      { id: "nike-zoomfly", name: "Nike Zoom Fly", price: 3300000, img: "your-nike-zoomfly.jpg", desc: "Giày chạy bộ chuyên nghiệp, đệm carbon.", size: [41, 42] },
+      { id: "reebok-classic", name: "Reebok Classic", price: 1900000, img: "your-reebok-classic.jpg", desc: "Form cổ điển, đế cao su, da mềm.", size: [39, 40] }
+    ];
+
+    const container = document.getElementById("product-container");
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedId = urlParams.get("id");
+    const p = products.find(item => item.id === selectedId);
+
+    if (!p) {
+      container.innerHTML = `<p>Không tìm thấy sản phẩm.</p>`;
+    } else {
+      const div = document.createElement("div");
+      div.className = "product-box";
+      div.innerHTML = `
+        <h2>${p.name}</h2>
+        <img src="${p.img}" alt="${p.name}">
+        <p>${p.desc}</p>
+        <p class="price">${p.price.toLocaleString()}₫</p>
+        <label>Size:
+          <select>${p.size.map(s => `<option>${s}</option>`).join("")}</select>
+        </label>
+        <div style="margin-top: 20px;">
+          <button onclick="addToCart('${p.id}','${p.name}',${p.price})">Thêm vào giỏ hàng</button>
+          <button onclick="buyNow('${p.id}','${p.name}',${p.price})">Mua ngay</button>
+        </div>
+        <div class="review-box">
+          <h4>Đánh giá</h4>
+          <form onsubmit="submitReview(event, '${p.id}')">
+            <input type="text" id="name-${p.id}" placeholder="Tên của bạn" required>
+            <select id="rating-${p.id}" required>
+              <option value="">Chọn sao</option>
+              <option value="5">5 ⭐</option>
+              <option value="4">4 ⭐</option>
+              <option value="3">3 ⭐</option>
+            </select>
+            <textarea id="comment-${p.id}" placeholder="Nhận xét" required></textarea>
+            <button type="submit">Gửi đánh giá</button>
+          </form>
+          <div id="list-${p.id}" class="review-list"></div>
+        </div>
+      `;
+      container.appendChild(div);
+      loadReviews(p.id);
+    }
+
+    function addToCart(id, name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ id, name, price, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} đã được thêm vào giỏ hàng`);
+    }
+
+    function buyNow(id, name, price) {
+      let cart = [{ id, name, price, quantity: 1 }];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "checkout.html";
+    }
+
+    function submitReview(e, id) {
+      e.preventDefault();
+      const name = document.getElementById("name-" + id).value.trim();
+      const rating = parseInt(document.getElementById("rating-" + id).value);
+      const comment = document.getElementById("comment-" + id).value.trim();
+      if (!name || !rating || !comment) return;
+      const reviews = JSON.parse(localStorage.getItem("reviews_" + id)) || [];
+      reviews.push({ name, rating, comment });
+      localStorage.setItem("reviews_" + id, JSON.stringify(reviews));
+      loadReviews(id);
+      e.target.reset();
+    }
+
+    function loadReviews(id) {
+      const list = document.getElementById("list-" + id);
+      const reviews = JSON.parse(localStorage.getItem("reviews_" + id)) || [];
+      list.innerHTML = reviews.map(r => `
+        <div class="review-item">
+          <strong>${r.name}</strong> ${"⭐".repeat(r.rating)}
+          <p>${r.comment}</p>
+        </div>
+      `).join("") || "<p>Chưa có đánh giá nào.</p>";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; margin: 0; background: #f4f4f4; color: #111; }
+    header { background: #111; color: #fff; padding: 20px; text-align: center; }
+    nav { background: #222; padding: 10px; display: flex; gap: 20px; justify-content: center; }
+    nav a { color: #fff; text-decoration: none; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    .section { padding: 40px; }
+    h2 { margin-bottom: 20px; }
+    .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 30px; }
+    button { padding: 10px 20px; background: #111; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Trang quản trị AUTHENTIC</h1>
+  </header>
+
+  <nav>
+    <a href="#products">Sản phẩm</a>
+    <a href="#orders">Đơn hàng</a>
+    <a href="#customers">Khách hàng</a>
+    <a href="#reports">Thống kê</a>
+    <a href="#staff">Nhân viên</a>
+  </nav>
+
+  <div class="section" id="products">
+    <h2>📦 Quản lý sản phẩm</h2>
+    <div class="card">
+      <p>Thêm, sửa, xóa sản phẩm trong cửa hàng.</p>
+      <a href="admin-products.html"><button>Quản lý sản phẩm</button></a>
+    </div>
+  </div>
+
+  <div class="section" id="orders">
+    <h2>📋 Quản lý đơn hàng</h2>
+    <div class="card">
+      <p>Xem trạng thái đơn, xác nhận, xử lý vận chuyển.</p>
+      <a href="admin-orders.html"><button>Quản lý đơn hàng</button></a>
+    </div>
+  </div>
+
+  <div class="section" id="customers">
+    <h2>👥 Quản lý khách hàng</h2>
+    <div class="card">
+      <p>Xem danh sách khách hàng, thông tin liên hệ, lịch sử mua hàng.</p>
+      <a href="admin-customers.html"><button>Xem khách hàng</button></a>
+    </div>
+  </div>
+
+  <div class="section" id="reports">
+    <h2>📊 Thống kê & Báo cáo</h2>
+    <div class="card">
+      <p>Xem doanh thu, số lượng đơn, sản phẩm bán chạy.</p>
+      <a href="admin-reports.html"><button>Xem báo cáo</button></a>
+    </div>
+  </div>
+
+  <div class="section" id="staff">
+    <h2>🧑‍💻 Quản lý nhân viên</h2>
+    <div class="card">
+      <p>Thêm, phân quyền, xóa tài khoản quản trị viên.</p>
+      <a href="admin-staff.html"><button>Quản lý nhân viên</button></a>
+    </div>
+  </div>
+</body>
+</html>
+<div style="padding: 20px;">
+  <a href="index.html">
+    <button style="padding: 10px 20px; background: #111; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+      ⬅ Về trang chủ
+    </button>
+  </a>
+</div>

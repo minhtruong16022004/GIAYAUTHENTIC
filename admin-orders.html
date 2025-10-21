@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quản lý đơn hàng | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; padding: 40px; background: #f9f9f9; color: #111; }
+    h1 { margin-bottom: 20px; }
+    .order { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .order p { margin: 4px 0; }
+    select, button { padding: 8px; margin-top: 10px; border-radius: 4px; border: 1px solid #ccc; }
+    button { background: #111; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <h1>Quản lý đơn hàng</h1>
+  <div id="orderList"></div>
+
+  <script>
+    let orders = JSON.parse(localStorage.getItem("user_orders")) || [];
+
+    function renderOrders() {
+      const container = document.getElementById("orderList");
+      container.innerHTML = "";
+      if (orders.length === 0) {
+        container.innerHTML = "<p>Không có đơn hàng nào.</p>";
+        return;
+      }
+
+      orders.forEach((order, i) => {
+        const div = document.createElement("div");
+        div.className = "order";
+        div.innerHTML = `
+          <p><strong>Đơn hàng #${i + 1}</strong></p>
+          <p>Khách: ${order.name}</p>
+          <p>Địa chỉ: ${order.address}</p>
+          <p>SĐT: ${order.phone}</p>
+          <p>Tổng tiền: ${order.total.toLocaleString()}₫</p>
+          <label>Trạng thái:
+            <select onchange="updateStatus(${i}, this.value)">
+              <option value="Chờ xác nhận" ${order.status === "Chờ xác nhận" ? "selected" : ""}>Chờ xác nhận</option>
+              <option value="Đã xác nhận" ${order.status === "Đã xác nhận" ? "selected" : ""}>Đã xác nhận</option>
+              <option value="Đang giao" ${order.status === "Đang giao" ? "selected" : ""}>Đang giao</option>
+              <option value="Hoàn tất" ${order.status === "Hoàn tất" ? "selected" : ""}>Hoàn tất</option>
+            </select>
+          </label>
+          <br/>
+          <button onclick="deleteOrder(${i})">Xóa đơn</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function updateStatus(index, status) {
+      orders[index].status = status;
+      localStorage.setItem("user_orders", JSON.stringify(orders));
+      renderOrders();
+    }
+
+    function deleteOrder(index) {
+      if (confirm("Bạn có chắc muốn xóa đơn này?")) {
+        orders.splice(index, 1);
+        localStorage.setItem("user_orders", JSON.stringify(orders));
+        renderOrders();
+      }
+    }
+
+    // Khởi tạo trạng thái nếu chưa có
+    orders = orders.map(o => ({ ...o, status: o.status || "Chờ xác nhận" }));
+    localStorage.setItem("user_orders", JSON.stringify(orders));
+    renderOrders();
+  </script>
+</body>
+</html>

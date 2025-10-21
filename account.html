@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tài khoản của tôi | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; margin: 0; background: #f9f9f9; color: #111; padding: 40px; }
+    h1 { font-size: 28px; margin-bottom: 20px; }
+    .section { background: #fff; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    label { display: block; margin-top: 15px; font-weight: 500; }
+    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 10px 20px; background: #111; color: #fff; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; }
+    button:hover { background: #333; }
+    .order { border-top: 1px solid #eee; padding: 10px 0; }
+    .order p { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>Tài khoản của tôi</h1>
+
+  <div class="section">
+    <h2>Thông tin cá nhân</h2>
+    <label>Họ và tên</label>
+    <input type="text" id="fullname" />
+    <label>Email</label>
+    <input type="email" id="email" />
+    <label>Số điện thoại</label>
+    <input type="tel" id="phone" />
+    <button onclick="saveProfile()">Lưu thông tin</button>
+  </div>
+
+  <div class="section">
+    <h2>Lịch sử đơn hàng</h2>
+    <div id="orderList"></div>
+  </div>
+
+  <div class="section">
+    <h2>Đổi mật khẩu</h2>
+    <label>Mật khẩu hiện tại</label>
+    <input type="password" id="currentPass" />
+    <label>Mật khẩu mới</label>
+    <input type="password" id="newPass" />
+    <label>Xác nhận mật khẩu mới</label>
+    <input type="password" id="confirmPass" />
+    <button onclick="changePassword()">Đổi mật khẩu</button>
+  </div>
+
+  <script>
+    // Load profile
+    const profile = JSON.parse(localStorage.getItem("user_profile")) || {};
+    document.getElementById("fullname").value = profile.fullname || "";
+    document.getElementById("email").value = profile.email || "";
+    document.getElementById("phone").value = profile.phone || "";
+
+    function saveProfile() {
+      const fullname = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      localStorage.setItem("user_profile", JSON.stringify({ fullname, email, phone }));
+      alert("Thông tin đã được lưu.");
+    }
+
+    // Load orders
+    const orders = JSON.parse(localStorage.getItem("user_orders")) || [];
+    const container = document.getElementById("orderList");
+    if (orders.length === 0) {
+      container.innerHTML = "<p>Chưa có đơn hàng nào.</p>";
+    } else {
+      orders.forEach((order, i) => {
+        const div = document.createElement("div");
+        div.className = "order";
+        div.innerHTML = `
+          <p><strong>Đơn hàng #${i + 1}</strong></p>
+          <p>Khách: ${order.name}</p>
+          <p>Địa chỉ: ${order.address}</p>
+          <p>SĐT: ${order.phone}</p>
+          <p>Tổng tiền: ${order.total.toLocaleString()}₫</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Đổi mật khẩu
+    function changePassword() {
+      const current = document.getElementById("currentPass").value;
+      const newPass = document.getElementById("newPass").value;
+      const confirm = document.getElementById("confirmPass").value;
+      const saved = localStorage.getItem("user_password") || "";
+
+      if (current !== saved) {
+        alert("Mật khẩu hiện tại không đúng.");
+        return;
+      }
+      if (!newPass || newPass !== confirm) {
+        alert("Mật khẩu mới không hợp lệ hoặc không khớp.");
+        return;
+      }
+      localStorage.setItem("user_password", newPass);
+      alert("Mật khẩu đã được thay đổi.");
+      document.getElementById("currentPass").value = "";
+      document.getElementById("newPass").value = "";
+      document.getElementById("confirmPass").value = "";
+    }
+  </script>
+</body>
+</html>

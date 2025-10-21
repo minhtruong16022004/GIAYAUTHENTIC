@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | AUTHENTIC</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #fff; color: #111; }
+    header { background: #fff; border-bottom: 1px solid #ccc; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 24px; font-weight: bold; }
+    nav a { margin-left: 20px; text-decoration: none; color: #111; font-weight: 500; }
+    section { padding: 40px; }
+    h2 { font-size: 28px; margin-bottom: 20px; text-align: center; }
+    .filters { text-align: center; margin-bottom: 30px; }
+    .filters select { padding: 8px 12px; margin: 0 10px; border: 1px solid #111; background: #fff; color: #111; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .product { border: 1px solid #ccc; padding: 20px; text-align: center; transition: transform 0.3s ease; }
+    .product:hover { transform: scale(1.05); }
+    .product img { width: 100%; height: auto; cursor: pointer; }
+    .product h4 { margin: 10px 0; font-size: 18px; }
+    .product p { font-size: 16px; color: #333; }
+    .product a { text-decoration: none; color: inherit; display: block; }
+    footer { background: #111; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AUTHENTIC</h1>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Tất cả sản phẩm</h2>
+    <div class="filters">
+      <select id="priceFilter">
+        <option value="all">Giá</option>
+        <option value="under2">Dưới 2 triệu</option>
+        <option value="2to3">2–3 triệu</option>
+        <option value="above3">Trên 3 triệu</option>
+      </select>
+      <select id="sizeFilter">
+        <option value="all">Size</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+      </select>
+    </div>
+
+    <div class="products" id="productList"></div>
+  </section>
+
+  <footer>
+    &copy; 2025 Giày AUTHENTIC. <a href="policy.html" style="color:#fff;">Chính sách</a> | <a href="contact.html" style="color:#fff;">Liên hệ</a>
+  </footer>
+
+  <script>
+    const products = [
+      { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, size: [40, 41, 42], img: "your-nike-af1.jpg" },
+      { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, size: [39, 40, 41], img: "your-adidas-superstar.jpg" },
+      { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, size: [38, 39, 40], img: "your-converse-chuck70.jpg" },
+      { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, size: [40, 41], img: "your-nike-dunklow.jpg" },
+      { id: "adidas-ultraboost", name: "Adidas Ultraboost", price: 3500000, size: [41, 42], img: "your-adidas-ultraboost.jpg" },
+      { id: "nike-zoomfly", name: "Nike Zoom Fly", price: 3300000, size: [41, 42], img: "your-nike-zoomfly.jpg" },
+      { id: "reebok-classic", name: "Reebok Classic", price: 1900000, size: [39, 40], img: "your-reebok-classic.jpg" }
+    ];
+
+    const productList = document.getElementById("productList");
+    const priceFilter = document.getElementById("priceFilter");
+    const sizeFilter = document.getElementById("sizeFilter");
+
+    function renderProducts() {
+      const priceVal = priceFilter.value;
+      const sizeVal = sizeFilter.value;
+      productList.innerHTML = "";
+
+      const filtered = products.filter(p => {
+        let priceMatch = false;
+        if (priceVal === "under2") priceMatch = p.price < 2000000;
+        else if (priceVal === "2to3") priceMatch = p.price >= 2000000 && p.price <= 3000000;
+        else if (priceVal === "above3") priceMatch = p.price > 3000000;
+        else priceMatch = true;
+
+        let sizeMatch = sizeVal === "all" || p.size.includes(parseInt(sizeVal));
+        return priceMatch && sizeMatch;
+      });
+
+      filtered.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <a href="product-details.html?id=${p.id}">
+            <img src="${p.img}" alt="${p.name}" />
+            <h4>${p.name}</h4>
+          </a>
+          <p>${p.price.toLocaleString()}₫</p>
+        `;
+        productList.appendChild(div);
+      });
+    }
+
+    priceFilter.addEventListener("change", renderProducts);
+    sizeFilter.addEventListener("change", renderProducts);
+    renderProducts();
+  </script>
+</body>
+</html>

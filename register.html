@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký | AUTHENTIC</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .register-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    h1 { text-align: center; margin-bottom: 30px; font-size: 24px; }
+    label { display: block; margin-top: 15px; font-weight: 500; }
+    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 12px; background: #111; color: #fff; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; }
+    button:hover { background: #333; }
+    .link { text-align: center; margin-top: 15px; }
+    .link a { color: #111; text-decoration: underline; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h1>Đăng ký</h1>
+    <form onsubmit="register(event)">
+      <label>Họ và tên</label>
+      <input type="text" id="fullname" required />
+      <label>Email</label>
+      <input type="email" id="email" required />
+      <label>Mật khẩu</label>
+      <input type="password" id="password" required />
+      <label>Xác nhận mật khẩu</label>
+      <input type="password" id="confirm" required />
+      <button type="submit">Đăng ký</button>
+    </form>
+    <div class="link">
+      <p>Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+    </div>
+  </div>
+
+  <script>
+    function register(e) {
+      e.preventDefault();
+      const name = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+
+      if (!name || !email || !pass || !confirm) {
+        alert("Vui lòng điền đầy đủ thông tin.");
+        return;
+      }
+
+      if (pass !== confirm) {
+        alert("Mật khẩu xác nhận không khớp.");
+        return;
+      }
+
+      // Tạm thời chỉ hiển thị thông báo
+      alert("Đăng ký thành công!");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
