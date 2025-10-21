@@ -38,15 +38,78 @@
 
   <script>
    const products = [
-  { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, size: [40, 41, 42], img: "assets/images/NIKE AF1.jpg" },
-  { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, size: [39, 40, 41], img: "assets/images/adidas sp.jpg" },
-  { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, size: [38, 39, 40], img: "assets/images/converse 70.jpg" },
-  { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, size: [40, 41], img: "assets/images/nike duck low.jpg" },
-  { id: "adidas-ultraboost", name: "Adidas Ultraboost", price: 3500000, size: [41, 42], img: "assets/images/adidas ultra.jpg" },
-  { id: "nike-zoomfly", name: "Nike Zoom Fly", price: 3300000, size: [41, 42], img: "assets/images/nike zoom.jpg" },
-  { id: "reebok-classic", name: "Reebok Classic", price: 1900000, size: [39, 40], img: "assets/images/rebok.jpg" },
-  { id: "vans-oldskool", name: "Vans Old Skool", price: 1600000, size: [38, 39, 40, 41], img: "assets/images/vans old school.jpg" },
-  { id: "adidas-nmdr1", name: "Adidas NMD R1", price: 3000000, size: [39, 40, 41, 42], img: "assets/images/adidas nmd.jpg" }
+  {
+    id: "nike-af1",
+    name: "Nike Air Force 1",
+    price: 2500000,
+    size: [40, 41, 42],
+    img: "assets/images/NIKE AF1.jpg",
+    description: "Thiết kế cổ điển với phần đế dày và công nghệ Air, phù hợp cả thể thao lẫn thời trang đường phố."
+  },
+  {
+    id: "adidas-superstar",
+    name: "Adidas Superstar",
+    price: 2200000,
+    size: [39, 40, 41],
+    img: "assets/images/adidas sp.jpg",
+    description: "Đôi giày biểu tượng với mũi vỏ sò đặc trưng, phối màu trắng đen dễ phối đồ, phù hợp mọi phong cách."
+  },
+  {
+    id: "converse-chuck70",
+    name: "Converse Chuck 70",
+    price: 1800000,
+    size: [38, 39, 40],
+    img: "assets/images/converse 70.jpg",
+    description: "Cổ cao, đế cao su bền bỉ, logo tròn bên hông – biểu tượng của sự tối giản và cá tính."
+  },
+  {
+    id: "nike-dunklow",
+    name: "Nike Dunk Low",
+    price: 3000000,
+    size: [40, 41],
+    img: "assets/images/nike duck low.jpg",
+    description: "Thiết kế low-top với phối màu trắng đen cổ điển, được yêu thích trong cộng đồng sneakerhead."
+  },
+  {
+    id: "adidas-ultraboost",
+    name: "Adidas Ultraboost",
+    price: 3500000,
+    size: [41, 42],
+    img: "assets/images/adidas ultra.jpg",
+    description: "Giày chạy bộ cao cấp với đế Boost êm ái, upper Primeknit co giãn, phù hợp cả thể thao và lifestyle."
+  },
+  {
+    id: "nike-zoomfly",
+    name: "Nike Zoom Fly",
+    price: 3300000,
+    size: [41, 42],
+    img: "assets/images/nike zoom.jpg",
+    description: "Thiết kế khí động học với đế ZoomX siêu nhẹ, tối ưu cho chạy bộ đường dài và hiệu suất cao."
+  },
+  {
+    id: "reebok-classic",
+    name: "Reebok Classic",
+    price: 1900000,
+    size: [39, 40],
+    img: "assets/images/rebok.jpg",
+    description: "Phong cách retro với upper da trắng, logo Reebok và cờ Anh – đơn giản mà tinh tế."
+  },
+  {
+    id: "vans-oldskool",
+    name: "Vans Old Skool",
+    price: 1600000,
+    size: [38, 39, 40, 41],
+    img: "assets/images/vans old school.jpg",
+    description: "Đôi giày skate huyền thoại với sọc trắng đặc trưng, chất liệu canvas và đế waffle bám tốt."
+  },
+  {
+    id: "adidas-nmdr1",
+    name: "Adidas NMD R1",
+    price: 3000000,
+    size: [39, 40, 41, 42],
+    img: "assets/images/adidas nmd.jpg",
+    description: "Thiết kế hiện đại với đế Boost đàn hồi, upper lưới thoáng khí, phù hợp phong cách techwear và năng động."
+  }
 ];
 
 
@@ -63,7 +126,8 @@
       div.innerHTML = `
         <h2>${p.name}</h2>
         <img src="${p.img}" alt="${p.name}">
-        <p>${p.desc}</p>
+       <p>${p.description}</p>
+
         <p class="price">${p.price.toLocaleString()}₫</p>
         <label>Size:
           <select>${p.size.map(s => `<option>${s}</option>`).join("")}</select>
