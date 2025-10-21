@@ -37,15 +37,18 @@
   </div>
 
   <script>
-    const products = [
-      { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, img: "your-nike-af1.jpg", desc: "Giày cổ điển, dễ phối đồ.", size: [39, 40, 41, 42] },
-      { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, img: "your-adidas-superstar.jpg", desc: "Thiết kế sọc đặc trưng, phong cách retro.", size: [39, 40, 41] },
-      { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, img: "your-converse-chuck70.jpg", desc: "Canvas cao cấp, đế cao su dày.", size: [38, 39, 40] },
-      { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, img: "your-nike-dunklow.jpg", desc: "Phối màu đa dạng, chất liệu da.", size: [40, 41] },
-      { id: "adidas-ultraboost", name: "Adidas Ultraboost", price: 3500000, img: "your-adidas-ultraboost.jpg", desc: "Đế Boost siêu êm, chạy bộ cực ngon.", size: [41, 42] },
-      { id: "nike-zoomfly", name: "Nike Zoom Fly", price: 3300000, img: "your-nike-zoomfly.jpg", desc: "Giày chạy bộ chuyên nghiệp, đệm carbon.", size: [41, 42] },
-      { id: "reebok-classic", name: "Reebok Classic", price: 1900000, img: "your-reebok-classic.jpg", desc: "Form cổ điển, đế cao su, da mềm.", size: [39, 40] }
-    ];
+   const products = [
+  { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, size: [40, 41, 42], img: "assets/images/NIKE AF1.jpg" },
+  { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, size: [39, 40, 41], img: "assets/images/adidas sp.jpg" },
+  { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, size: [38, 39, 40], img: "assets/images/converse 70.jpg" },
+  { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, size: [40, 41], img: "assets/images/nike duck low.jpg" },
+  { id: "adidas-ultraboost", name: "Adidas Ultraboost", price: 3500000, size: [41, 42], img: "assets/images/adidas ultra.jpg" },
+  { id: "nike-zoomfly", name: "Nike Zoom Fly", price: 3300000, size: [41, 42], img: "assets/images/nike zoom.jpg" },
+  { id: "reebok-classic", name: "Reebok Classic", price: 1900000, size: [39, 40], img: "assets/images/rebok.jpg" },
+  { id: "vans-oldskool", name: "Vans Old Skool", price: 1600000, size: [38, 39, 40, 41], img: "assets/images/vans old school.jpg" },
+  { id: "adidas-nmdr1", name: "Adidas NMD R1", price: 3000000, size: [39, 40, 41, 42], img: "assets/images/adidas nmd.jpg" }
+];
+
 
     const container = document.getElementById("product-container");
     const urlParams = new URLSearchParams(window.location.search);
