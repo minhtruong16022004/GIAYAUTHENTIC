@@ -74,6 +74,7 @@
     id: "adidas-ultraboost",
     name: "Adidas Ultraboost",
     price: 3500000,
+    discount: 2800000,
     size: [41, 42],
     img: "assets/images/adidas ultra.jpg",
     description: "Giày chạy bộ cao cấp với đế Boost êm ái, upper Primeknit co giãn, phù hợp cả thể thao và lifestyle."
@@ -82,6 +83,7 @@
     id: "nike-zoomfly",
     name: "Nike Zoom Fly",
     price: 3300000,
+    discount: 2805000,
     size: [41, 42],
     img: "assets/images/nike zoom.jpg",
     description: "Thiết kế khí động học với đế ZoomX siêu nhẹ, tối ưu cho chạy bộ đường dài và hiệu suất cao."
@@ -90,6 +92,7 @@
     id: "reebok-classic",
     name: "Reebok Classic",
     price: 1900000,
+    discount: 1710000,
     size: [39, 40],
     img: "assets/images/rebok.jpg",
     description: "Phong cách retro với upper da trắng, logo Reebok và cờ Anh – đơn giản mà tinh tế."
@@ -128,13 +131,19 @@
         <img src="${p.img}" alt="${p.name}">
        <p>${p.description}</p>
 
-        <p class="price">${p.price.toLocaleString()}₫</p>
+<p class="price">
+  ${p.discount && p.discount < p.price
+    ? `<span style="text-decoration:line-through;color:#888">${p.price.toLocaleString()}₫</span> 
+       <span style="color:red;font-weight:bold;margin-left:10px">${p.discount.toLocaleString()}₫</span>`
+    : `<span>${p.price.toLocaleString()}₫</span>`}
+</p>
         <label>Size:
           <select>${p.size.map(s => `<option>${s}</option>`).join("")}</select>
         </label>
         <div style="margin-top: 20px;">
-          <button onclick="addToCart('${p.id}','${p.name}',${p.price})">Thêm vào giỏ hàng</button>
-          <button onclick="buyNow('${p.id}','${p.name}',${p.price})">Mua ngay</button>
+          <button onclick="addToCart('${p.id}','${p.name}',${p.discount || p.price})">Thêm vào giỏ hàng</button>
+<button onclick="buyNow('${p.id}','${p.name}',${p.discount || p.price})">Mua ngay</button>
+
         </div>
         <div class="review-box">
           <h4>Đánh giá</h4>
