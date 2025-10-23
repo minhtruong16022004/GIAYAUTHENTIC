@@ -2,60 +2,56 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Đăng ký | AUTHENTIC</title>
+  <title>Đăng ký tài khoản | AUTHENTIC</title>
   <style>
-    body { font-family: 'Montserrat', sans-serif; background: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .register-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-    h1 { text-align: center; margin-bottom: 30px; font-size: 24px; }
-    label { display: block; margin-top: 15px; font-weight: 500; }
-    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 12px; background: #111; color: #fff; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; }
+    body { font-family: 'Montserrat', sans-serif; background: #f2f2f2; margin: 0; padding: 0; }
+    .container { max-width: 400px; margin: 80px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { text-align: center; margin-bottom: 20px; }
+    input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 10px; background: #111; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
     button:hover { background: #333; }
-    .link { text-align: center; margin-top: 15px; }
-    .link a { color: #111; text-decoration: underline; font-weight: 500; }
+    .message { margin-top: 15px; text-align: center; color: green; }
   </style>
 </head>
 <body>
-  <div class="register-box">
-    <h1>Đăng ký</h1>
-    <form onsubmit="register(event)">
-      <label>Họ và tên</label>
-      <input type="text" id="fullname" required />
-      <label>Email</label>
-      <input type="email" id="email" required />
-      <label>Mật khẩu</label>
-      <input type="password" id="password" required />
-      <label>Xác nhận mật khẩu</label>
-      <input type="password" id="confirm" required />
+  <div class="container">
+    <h2>Đăng ký tài khoản</h2>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Tên đăng nhập" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Mật khẩu" required />
+      <input type="password" id="confirm" placeholder="Xác nhận mật khẩu" required />
       <button type="submit">Đăng ký</button>
+      <div class="message" id="message"></div>
     </form>
-    <div class="link">
-      <p>Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
-    </div>
   </div>
 
   <script>
-    function register(e) {
+    const form = document.getElementById("registerForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
-      const name = document.getElementById("fullname").value.trim();
+      const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
-      const pass = document.getElementById("password").value;
+      const password = document.getElementById("password").value;
       const confirm = document.getElementById("confirm").value;
 
-      if (!name || !email || !pass || !confirm) {
-        alert("Vui lòng điền đầy đủ thông tin.");
+      if (password !== confirm) {
+        message.textContent = "Mật khẩu xác nhận không khớp.";
+        message.style.color = "red";
         return;
       }
 
-      if (pass !== confirm) {
-        alert("Mật khẩu xác nhận không khớp.");
-        return;
-      }
+      // Lưu vào localStorage (demo)
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      users.push({ username, email, password });
+      localStorage.setItem("users", JSON.stringify(users));
 
-      // Tạm thời chỉ hiển thị thông báo
-      alert("Đăng ký thành công!");
-      window.location.href = "login.html";
-    }
+      message.textContent = "Đăng ký thành công!";
+      message.style.color = "green";
+      form.reset();
+    });
   </script>
 </body>
 </html>
