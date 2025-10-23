@@ -153,6 +153,16 @@
   <div style="position: absolute; top: 10%; left: 5%; background: red; color: white; padding: 10px 20px; font-size: 28px; font-weight: bold; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
     GIẢM GIÁ 50%
   </div>
+<div class="search-bar" style="text-align: center; margin: 40px 0;">
+  <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." style="
+    padding: 10px 16px;
+    width: 300px;
+    max-width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  ">
+</div>
 
   <!-- Chữ chính và nút CTA -->
   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
@@ -262,5 +272,39 @@
     <a href="about.html">Giới thiệu</a> |
     <a href="faq.html">Q&A</a> | 
   </footer>
+  <script>
+const products = [
+  { id: "nike-af1", name: "Nike Air Force 1", price: 2500000, img: "assets/images/NIKE AF1.jpg" },
+  { id: "adidas-superstar", name: "Adidas Superstar", price: 2200000, img: "assets/images/adidas sp.jpg" },
+  { id: "converse-chuck70", name: "Converse Chuck 70", price: 1800000, img: "assets/images/converse 70.jpg" },
+  { id: "nike-dunklow", name: "Nike Dunk Low", price: 3000000, img: "assets/images/nike duck low.jpg" },
+  { id: "adidas-nmdr1", name: "Adidas NMD R1", price: 3000000, img: "assets/images/adidas nmd.jpg" },
+  { id: "vans-oldskool", name: "Vans Old Skool", price: 1600000, img: "assets/images/vans old school.jpg" },
+  { id: "reebok-classic", name: "Reebok Classic", price: 1900000, img: "assets/images/rebok.jpg" }
+];
+
+function renderProducts(list) {
+  const container = document.getElementById("productList");
+  container.innerHTML = list.map(p => `
+    <div class="product">
+      <a href="product-details.html?id=${p.id}">
+        <img src="${p.img}" />
+        <h4>${p.name}</h4>
+      </a>
+      <p>${p.price.toLocaleString()}₫</p>
+    </div>
+  `).join("");
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  const keyword = this.value.toLowerCase();
+  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+  renderProducts(filtered);
+});
+
+// Hiển thị toàn bộ sản phẩm ban đầu
+renderProducts(products);
+</script>
+
 </body>
 </html>
